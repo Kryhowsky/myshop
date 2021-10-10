@@ -1,7 +1,7 @@
 package com.kryhowsky.myshop.controller;
 
 import com.kryhowsky.myshop.mapper.Impl.ProductMapperImpl;
-import com.kryhowsky.myshop.model.dao.Product;
+import com.kryhowsky.myshop.model.dto.ProductDto;
 import com.kryhowsky.myshop.service.Impl.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,17 +15,12 @@ public class ProductController {
     private final ProductMapperImpl productMapper;
 
     @PostMapping()
-    public Product saveProduct(@RequestBody Product product) {
-        return productService.save(product);
+    public ProductDto saveProduct(@RequestBody ProductDto product) {
+        return productMapper.toDto(productService.save(productMapper.toDao(product)));
     }
 
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Long id) {
-        return productService.getProductById(id);
+    public ProductDto getProductById(@PathVariable Long id) {
+        return productMapper.toDto(productService.getProductById(id));
     }
-
-//    @GetMapping("/{id}")
-//    public ProductDto getProductById(@PathVariable Long id) {
-//        return productMapper.toDto(productService.getProductById(id));
-//    }
 }

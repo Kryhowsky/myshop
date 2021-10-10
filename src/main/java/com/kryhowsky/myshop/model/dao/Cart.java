@@ -1,30 +1,33 @@
 package com.kryhowsky.myshop.model.dao;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "cart")
+@Table(name = "carts")
 public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @ManyToOne(optional = false)
-//    private User user;
+    @JsonIgnore
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(optional = false)
+    private User user;
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "cart_product",
-//            joinColumns = @JoinColumn(name = "cart_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id")
-//    )
-//    private Set<Product> products;
+    @ManyToMany
+    @JoinTable(
+            name = "carts_products",
+            joinColumns = @JoinColumn(name = "cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private Set<Product> products;
 }

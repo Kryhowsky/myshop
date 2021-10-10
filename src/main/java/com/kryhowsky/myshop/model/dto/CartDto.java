@@ -2,10 +2,7 @@ package com.kryhowsky.myshop.model.dto;
 
 import com.kryhowsky.myshop.model.dao.Product;
 import com.kryhowsky.myshop.model.dao.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 

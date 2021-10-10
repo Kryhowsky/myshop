@@ -7,13 +7,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
 
     @Id
@@ -27,7 +28,7 @@ public class Product {
     private Integer quantity;
     private String imgAddress;
 
-//    @ManyToMany(mappedBy = "products")
-//    private Set<Cart> carts;
+    @ManyToMany(mappedBy = "products")
+    private Set<Cart> carts;
 
 }

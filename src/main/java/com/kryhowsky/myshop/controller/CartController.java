@@ -1,6 +1,7 @@
 package com.kryhowsky.myshop.controller;
 
-import com.kryhowsky.myshop.model.dao.Cart;
+import com.kryhowsky.myshop.mapper.Impl.CartMapperImpl;
+import com.kryhowsky.myshop.model.dto.CartDto;
 import com.kryhowsky.myshop.service.Impl.CartServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +12,15 @@ import org.springframework.web.bind.annotation.*;
 public class CartController {
 
     private final CartServiceImpl cartService;
+    private final CartMapperImpl cartMapper;
 
     @PostMapping()
-    public Cart saveCart(@RequestBody Cart cart) {
-        return cartService.save(cart);
+    public CartDto saveCart(@RequestBody CartDto cart) {
+        return cartMapper.toDto(cartService.save(cartMapper.toDao(cart)));
     }
 
     @GetMapping("/{id}")
-    public Cart getCartById(@PathVariable Long id) {
-        return cartService.getCartById(id);
+    public CartDto getCartById(@PathVariable Long id) {
+        return cartMapper.toDto(cartService.getCartById(id));
     }
 }

@@ -1,16 +1,16 @@
 package com.kryhowsky.myshop.model.dao;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -24,6 +24,8 @@ public class User {
     private String firstName;
     private String lastName;
 
-//    @OneToMany(mappedBy = "customer")
-//    private Set<Cart> carts;
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "user")
+    private Set<Cart> carts;
+
 }
